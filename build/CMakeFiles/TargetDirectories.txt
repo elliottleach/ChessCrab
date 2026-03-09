@@ -1,0 +1,3 @@
+/Users/elliottleach/ChessCrab/build/CMakeFiles/chesscrab.dir
+/Users/elliottleach/ChessCrab/build/CMakeFiles/edit_cache.dir
+/Users/elliottleach/ChessCrab/build/CMakeFiles/rebuild_cache.dir

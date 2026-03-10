@@ -1,7 +1,9 @@
 #include <iostream>
+#include "board.h"
 using namespace std;
 
 int main() {
-    cout << "What is ChessCrab?" << endl;
+    Board board;
+    cout << board.toString() << endl;
     return 0;
 }

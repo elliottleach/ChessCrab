@@ -25,7 +25,7 @@ struct Board {
     void makeMove(const Move& move);
 
     // undoes the last move made, restoring the previous position
-    void undoMove(const Move& move);
+    void undoMove();
 
     bool canCastleKingside() const; // returns true if the current player can castle kingside
     bool canCastleQueenside() const; // returns true if the current player can castle queens

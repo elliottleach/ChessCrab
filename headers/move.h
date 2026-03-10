@@ -18,7 +18,8 @@ struct Move {
     Square to;
     MoveFlag flag;
     PieceType promotionPiece; // only meaningful if flag is Promotion
-
+    Piece capturedPiece; // only meaningful if flag is Capture or PromotionCapture
+    
     // default constructor - represents a null/invalid move
     Move() 
         : from(NO_SQUARE), to(NO_SQUARE), 

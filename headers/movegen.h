@@ -1,1 +1,9 @@
-// for later refactoring, this file will contain move generation code. It is currently empty because the move generation code is currently in board.cpp, but it will be moved here eventually.
+#pragma once
+#include "board.h"
+#include <vector>
+
+namespace MoveGen {
+
+std::vector<Move> generateLegalMoves(const Board& board);
+
+}

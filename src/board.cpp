@@ -1,6 +1,7 @@
 #include "board.h"
 #include "types.h"
 #include "move.h"
+#include "movegen.h"
 #include <iostream>
 
 Board::Board() {
@@ -55,6 +56,12 @@ void Board::makeMove(const Move& move) {
     Move move_copy = move; // create a copy of the move to modify
     move_copy.capturedPiece = board[move.to / 8][move.to % 8];
     
+    move_copy.savedState = {
+        castleWhiteKing, castleWhiteQueen,
+        castleBlackKing, castleBlackQueen,
+        enPassantSquare
+    };
+
     if (move.from != NO_SQUARE) {
         int rank = move.from / 8;
         int file = move.from % 8;
@@ -68,6 +75,7 @@ void Board::makeMove(const Move& move) {
         board[move.from / 8][move.from % 8] = NO_PIECE;
     }
     moveHistory.push_back(move_copy);
+    sideToMove = (sideToMove == Colour::White) ? Colour::Black : Colour::White;
 }
 
 void Board::undoMove() {
@@ -77,9 +85,15 @@ void Board::undoMove() {
     }
     Move lastMove = moveHistory.back();
     moveHistory.pop_back();
-    
+
+    castleWhiteKing  = lastMove.savedState.castleWK;
+    castleWhiteQueen = lastMove.savedState.castleWQ;
+    castleBlackKing  = lastMove.savedState.castleBK;
+    castleBlackQueen = lastMove.savedState.castleBQ;
+    enPassantSquare  = lastMove.savedState.enPassantSquare;
     board[lastMove.from / 8][lastMove.from % 8] = board[lastMove.to / 8][lastMove.to % 8];
     board[lastMove.to / 8][lastMove.to % 8] = lastMove.capturedPiece;
+    sideToMove = (sideToMove == Colour::White) ? Colour::Black : Colour::White;
 }
 
 bool Board::canCastleKingside() const {
@@ -98,9 +112,7 @@ bool Board::canCastleQueenside() const {
     }
 }
 
-bool Board::isInCheck() const {
-    return false; // placeholder implementation
-}
+
 
 std::string Board::toString() const {
     std::string result;
@@ -131,4 +143,105 @@ std::string Board::toString() const {
         result += '\n';
     }
     return result;
+}
+
+bool Board::isInCheck() const {
+    // step 1 - find the king's square
+    int kingRank = -1, kingFile = -1;
+    for (int rank = 0; rank < 8; rank++) {
+        for (int file = 0; file < 8; file++) {
+            Piece p = board[rank][file];
+            if (p.type == PieceType::King && p.colour == sideToMove) {
+                kingRank = rank;
+                kingFile = file;
+            }
+        }
+    }
+
+    // step 2 - is any enemy piece attacking that square?
+    Colour enemy = (sideToMove == Colour::White) ? Colour::Black : Colour::White;
+
+    // check enemy knights
+    int knightMoves[8][2] = {
+        {2,1},{2,-1},{-2,1},{-2,-1},
+        {1,2},{1,-2},{-1,2},{-1,-2}
+    };
+    for (auto& km : knightMoves) {
+        int r = kingRank + km[0];
+        int f = kingFile  + km[1];
+        if (r >= 0 && r < 8 && f >= 0 && f < 8) {
+            Piece p = board[r][f];
+            if (p.type == PieceType::Knight && p.colour == enemy) return true;
+        }
+    }
+
+    // check enemy pawns
+    int pawnDir = (sideToMove == Colour::White) ? 1 : -1;
+    for (int df : {-1, 1}) {
+        int r = kingRank + pawnDir;
+        int f = kingFile + df;
+        if (r >= 0 && r < 8 && f >= 0 && f < 8) {
+            Piece p = board[r][f];
+            if (p.type == PieceType::Pawn && p.colour == enemy) return true;
+        }
+    }
+
+    // check enemy rooks and queens (straight lines)
+    int straightDirs[4][2] = {{1,0},{-1,0},{0,1},{0,-1}};
+    for (auto& d : straightDirs) {
+        int r = kingRank + d[0];
+        int f = kingFile  + d[1];
+        while (r >= 0 && r < 8 && f >= 0 && f < 8) {
+            Piece p = board[r][f];
+            if (p.type != PieceType::NO_PIECE_TYPE) {
+                if (p.colour == enemy &&
+                   (p.type == PieceType::Rook || p.type == PieceType::Queen))
+                    return true;
+                break; // blocked by any piece
+            }
+            r += d[0]; f += d[1];
+        }
+    }
+
+    // check enemy bishops and queens (diagonals)
+    int diagDirs[4][2] = {{1,1},{1,-1},{-1,1},{-1,-1}};
+    for (auto& d : diagDirs) {
+        int r = kingRank + d[0];
+        int f = kingFile  + d[1];
+        while (r >= 0 && r < 8 && f >= 0 && f < 8) {
+            Piece p = board[r][f];
+            if (p.type != PieceType::NO_PIECE_TYPE) {
+                if (p.colour == enemy &&
+                   (p.type == PieceType::Bishop || p.type == PieceType::Queen))
+                    return true;
+                break;
+            }
+            r += d[0]; f += d[1];
+        }
+    }
+
+    // check enemy king (prevents kings from touching)
+    int kingDirs[8][2] = {
+        {1,0},{-1,0},{0,1},{0,-1},
+        {1,1},{1,-1},{-1,1},{-1,-1}
+    };
+    for (auto& d : kingDirs) {
+        int r = kingRank + d[0];
+        int f = kingFile  + d[1];
+        if (r >= 0 && r < 8 && f >= 0 && f < 8) {
+            Piece p = board[r][f];
+            if (p.type == PieceType::King && p.colour == enemy) return true;
+        }
+    }
+
+    return false;
+}
+
+bool Board::isCheckmate() const {
+    return false; // placeholder implementation
+}
+
+
+std::vector<Move> Board::generateLegalMoves() const {
+    return MoveGen::generateLegalMoves(*this);
 }

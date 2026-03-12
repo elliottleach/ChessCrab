@@ -13,13 +13,18 @@ enum class MoveFlag {
     PromotionCapture
 };
 
+struct BoardState {
+    bool castleWK, castleWQ, castleBK, castleBQ;
+    Square enPassantSquare;
+};
+
 struct Move {
     Square from;
     Square to;
     MoveFlag flag;
     PieceType promotionPiece; // only meaningful if flag is Promotion
     Piece capturedPiece; // only meaningful if flag is Capture or PromotionCapture
-    
+    BoardState savedState; // for undoing moves
     // default constructor - represents a null/invalid move
     Move() 
         : from(NO_SQUARE), to(NO_SQUARE), 
@@ -38,3 +43,4 @@ struct Move {
     // converts to UCI format e.g. "e2e4", "e7e8q"
     std::string toUCI() const;
 };
+

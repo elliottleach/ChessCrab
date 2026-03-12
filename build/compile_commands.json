@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/elliottleach/ChessCrab/build",
+  "command": "/usr/bin/clang++  -I/Users/elliottleach/ChessCrab/headers -g -std=gnu++17 -arch arm64 -o CMakeFiles/chesscrab.dir/src/main.cpp.o -c /Users/elliottleach/ChessCrab/src/main.cpp",
+  "file": "/Users/elliottleach/ChessCrab/src/main.cpp",
+  "output": "CMakeFiles/chesscrab.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/elliottleach/ChessCrab/build",
+  "command": "/usr/bin/clang++  -I/Users/elliottleach/ChessCrab/headers -g -std=gnu++17 -arch arm64 -o CMakeFiles/chesscrab.dir/src/board.cpp.o -c /Users/elliottleach/ChessCrab/src/board.cpp",
+  "file": "/Users/elliottleach/ChessCrab/src/board.cpp",
+  "output": "CMakeFiles/chesscrab.dir/src/board.cpp.o"
+},
+{
+  "directory": "/Users/elliottleach/ChessCrab/build",
+  "command": "/usr/bin/clang++  -I/Users/elliottleach/ChessCrab/headers -g -std=gnu++17 -arch arm64 -o CMakeFiles/chesscrab.dir/src/movegen.cpp.o -c /Users/elliottleach/ChessCrab/src/movegen.cpp",
+  "file": "/Users/elliottleach/ChessCrab/src/movegen.cpp",
+  "output": "CMakeFiles/chesscrab.dir/src/movegen.cpp.o"
+}
+]

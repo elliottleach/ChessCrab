@@ -76,43 +76,43 @@ CMakeFiles/chesscrab.dir/src/main.cpp.o: CMakeFiles/chesscrab.dir/flags.make
 CMakeFiles/chesscrab.dir/src/main.cpp.o: /Users/elliottleach/ChessCrab/src/main.cpp
 CMakeFiles/chesscrab.dir/src/main.cpp.o: CMakeFiles/chesscrab.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elliottleach/ChessCrab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/chesscrab.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chesscrab.dir/src/main.cpp.o -MF CMakeFiles/chesscrab.dir/src/main.cpp.o.d -o CMakeFiles/chesscrab.dir/src/main.cpp.o -c /Users/elliottleach/ChessCrab/src/main.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chesscrab.dir/src/main.cpp.o -MF CMakeFiles/chesscrab.dir/src/main.cpp.o.d -o CMakeFiles/chesscrab.dir/src/main.cpp.o -c /Users/elliottleach/ChessCrab/src/main.cpp
 
 CMakeFiles/chesscrab.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chesscrab.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elliottleach/ChessCrab/src/main.cpp > CMakeFiles/chesscrab.dir/src/main.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elliottleach/ChessCrab/src/main.cpp > CMakeFiles/chesscrab.dir/src/main.cpp.i
 
 CMakeFiles/chesscrab.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chesscrab.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elliottleach/ChessCrab/src/main.cpp -o CMakeFiles/chesscrab.dir/src/main.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elliottleach/ChessCrab/src/main.cpp -o CMakeFiles/chesscrab.dir/src/main.cpp.s
 
 CMakeFiles/chesscrab.dir/src/board.cpp.o: CMakeFiles/chesscrab.dir/flags.make
 CMakeFiles/chesscrab.dir/src/board.cpp.o: /Users/elliottleach/ChessCrab/src/board.cpp
 CMakeFiles/chesscrab.dir/src/board.cpp.o: CMakeFiles/chesscrab.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elliottleach/ChessCrab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/chesscrab.dir/src/board.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chesscrab.dir/src/board.cpp.o -MF CMakeFiles/chesscrab.dir/src/board.cpp.o.d -o CMakeFiles/chesscrab.dir/src/board.cpp.o -c /Users/elliottleach/ChessCrab/src/board.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chesscrab.dir/src/board.cpp.o -MF CMakeFiles/chesscrab.dir/src/board.cpp.o.d -o CMakeFiles/chesscrab.dir/src/board.cpp.o -c /Users/elliottleach/ChessCrab/src/board.cpp
 
 CMakeFiles/chesscrab.dir/src/board.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chesscrab.dir/src/board.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elliottleach/ChessCrab/src/board.cpp > CMakeFiles/chesscrab.dir/src/board.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elliottleach/ChessCrab/src/board.cpp > CMakeFiles/chesscrab.dir/src/board.cpp.i
 
 CMakeFiles/chesscrab.dir/src/board.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chesscrab.dir/src/board.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elliottleach/ChessCrab/src/board.cpp -o CMakeFiles/chesscrab.dir/src/board.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elliottleach/ChessCrab/src/board.cpp -o CMakeFiles/chesscrab.dir/src/board.cpp.s
 
 CMakeFiles/chesscrab.dir/src/movegen.cpp.o: CMakeFiles/chesscrab.dir/flags.make
 CMakeFiles/chesscrab.dir/src/movegen.cpp.o: /Users/elliottleach/ChessCrab/src/movegen.cpp
 CMakeFiles/chesscrab.dir/src/movegen.cpp.o: CMakeFiles/chesscrab.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elliottleach/ChessCrab/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/chesscrab.dir/src/movegen.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chesscrab.dir/src/movegen.cpp.o -MF CMakeFiles/chesscrab.dir/src/movegen.cpp.o.d -o CMakeFiles/chesscrab.dir/src/movegen.cpp.o -c /Users/elliottleach/ChessCrab/src/movegen.cpp
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/chesscrab.dir/src/movegen.cpp.o -MF CMakeFiles/chesscrab.dir/src/movegen.cpp.o.d -o CMakeFiles/chesscrab.dir/src/movegen.cpp.o -c /Users/elliottleach/ChessCrab/src/movegen.cpp
 
 CMakeFiles/chesscrab.dir/src/movegen.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/chesscrab.dir/src/movegen.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elliottleach/ChessCrab/src/movegen.cpp > CMakeFiles/chesscrab.dir/src/movegen.cpp.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elliottleach/ChessCrab/src/movegen.cpp > CMakeFiles/chesscrab.dir/src/movegen.cpp.i
 
 CMakeFiles/chesscrab.dir/src/movegen.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/chesscrab.dir/src/movegen.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elliottleach/ChessCrab/src/movegen.cpp -o CMakeFiles/chesscrab.dir/src/movegen.cpp.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elliottleach/ChessCrab/src/movegen.cpp -o CMakeFiles/chesscrab.dir/src/movegen.cpp.s
 
 # Object files for target chesscrab
 chesscrab_OBJECTS = \

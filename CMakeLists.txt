@@ -11,3 +11,11 @@ add_executable(chesscrab
 )
 
 target_include_directories(chesscrab PRIVATE headers)
+
+add_executable(test_moves
+    src/test_moves.cpp
+    src/board.cpp
+    src/movegen.cpp
+)
+
+target_include_directories(test_moves PRIVATE headers)

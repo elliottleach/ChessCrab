@@ -129,12 +129,26 @@ chesscrab/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/build
 .PHONY : chesscrab/fast
 
+#=============================================================================
+# Target rules for targets named test_moves
+
+# Build rule for target.
+test_moves: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_moves
+.PHONY : test_moves
+
+# fast build rule for target.
+test_moves/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/build
+.PHONY : test_moves/fast
+
 src/board.o: src/board.cpp.o
 .PHONY : src/board.o
 
 # target to build an object file
 src/board.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/src/board.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/board.cpp.o
 .PHONY : src/board.cpp.o
 
 src/board.i: src/board.cpp.i
@@ -143,6 +157,7 @@ src/board.i: src/board.cpp.i
 # target to preprocess a source file
 src/board.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/src/board.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/board.cpp.i
 .PHONY : src/board.cpp.i
 
 src/board.s: src/board.cpp.s
@@ -151,6 +166,7 @@ src/board.s: src/board.cpp.s
 # target to generate assembly for a file
 src/board.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/src/board.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/board.cpp.s
 .PHONY : src/board.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -183,6 +199,7 @@ src/movegen.o: src/movegen.cpp.o
 # target to build an object file
 src/movegen.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/src/movegen.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/movegen.cpp.o
 .PHONY : src/movegen.cpp.o
 
 src/movegen.i: src/movegen.cpp.i
@@ -191,6 +208,7 @@ src/movegen.i: src/movegen.cpp.i
 # target to preprocess a source file
 src/movegen.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/src/movegen.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/movegen.cpp.i
 .PHONY : src/movegen.cpp.i
 
 src/movegen.s: src/movegen.cpp.s
@@ -199,7 +217,32 @@ src/movegen.s: src/movegen.cpp.s
 # target to generate assembly for a file
 src/movegen.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/src/movegen.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/movegen.cpp.s
 .PHONY : src/movegen.cpp.s
+
+src/test_moves.o: src/test_moves.cpp.o
+.PHONY : src/test_moves.o
+
+# target to build an object file
+src/test_moves.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/test_moves.cpp.o
+.PHONY : src/test_moves.cpp.o
+
+src/test_moves.i: src/test_moves.cpp.i
+.PHONY : src/test_moves.i
+
+# target to preprocess a source file
+src/test_moves.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/test_moves.cpp.i
+.PHONY : src/test_moves.cpp.i
+
+src/test_moves.s: src/test_moves.cpp.s
+.PHONY : src/test_moves.s
+
+# target to generate assembly for a file
+src/test_moves.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/src/test_moves.cpp.s
+.PHONY : src/test_moves.cpp.s
 
 # Help Target
 help:
@@ -210,6 +253,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... chesscrab"
+	@echo "... test_moves"
 	@echo "... src/board.o"
 	@echo "... src/board.i"
 	@echo "... src/board.s"
@@ -219,6 +263,9 @@ help:
 	@echo "... src/movegen.o"
 	@echo "... src/movegen.i"
 	@echo "... src/movegen.s"
+	@echo "... src/test_moves.o"
+	@echo "... src/test_moves.i"
+	@echo "... src/test_moves.s"
 .PHONY : help
 
 

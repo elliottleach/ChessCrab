@@ -1,0 +1,1 @@
+/usr/bin/clang++ -g -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/test_moves.dir/src/test_moves.cpp.o CMakeFiles/test_moves.dir/src/board.cpp.o CMakeFiles/test_moves.dir/src/movegen.cpp.o -o test_moves

@@ -64,10 +64,12 @@ CMAKE_BINARY_DIR = /Users/elliottleach/ChessCrab/build
 
 # The main recursive "all" target.
 all: CMakeFiles/chesscrab.dir/all
+all: CMakeFiles/test_moves.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/chesscrab.dir/codegen
+codegen: CMakeFiles/test_moves.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -76,6 +78,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/chesscrab.dir/clean
+clean: CMakeFiles/test_moves.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -109,6 +112,38 @@ CMakeFiles/chesscrab.dir/codegen:
 CMakeFiles/chesscrab.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/chesscrab.dir/build.make CMakeFiles/chesscrab.dir/clean
 .PHONY : CMakeFiles/chesscrab.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/test_moves.dir
+
+# All Build rule for target.
+CMakeFiles/test_moves.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/elliottleach/ChessCrab/build/CMakeFiles --progress-num=5,6,7,8 "Built target test_moves"
+.PHONY : CMakeFiles/test_moves.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_moves.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/elliottleach/ChessCrab/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/test_moves.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/elliottleach/ChessCrab/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_moves.dir/rule
+
+# Convenience name for target.
+test_moves: CMakeFiles/test_moves.dir/rule
+.PHONY : test_moves
+
+# codegen rule for target.
+CMakeFiles/test_moves.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/elliottleach/ChessCrab/build/CMakeFiles --progress-num=5,6,7,8 "Finished codegen for target test_moves"
+.PHONY : CMakeFiles/test_moves.dir/codegen
+
+# clean rule for target.
+CMakeFiles/test_moves.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_moves.dir/build.make CMakeFiles/test_moves.dir/clean
+.PHONY : CMakeFiles/test_moves.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -51,29 +51,97 @@ Board::Board() {
 }
 
 void Board::makeMove(const Move& move) {
-    Piece place_holder;
+    int fromRank = move.from / 8;
+    int fromFile = move.from % 8;
+    int toRank   = move.to / 8;
+    int toFile   = move.to % 8;
 
-    Move move_copy = move; // create a copy of the move to modify
-    move_copy.capturedPiece = board[move.to / 8][move.to % 8];
-    
+    Piece movingPiece = board[fromRank][fromFile];
+
+    // Save state and default captured piece before anything changes
+    Move move_copy = move;
     move_copy.savedState = {
         castleWhiteKing, castleWhiteQueen,
         castleBlackKing, castleBlackQueen,
         enPassantSquare
     };
+    move_copy.capturedPiece = board[toRank][toFile];
 
-    if (move.from != NO_SQUARE) {
-        int rank = move.from / 8;
-        int file = move.from % 8;
-        place_holder = board[rank][file];
-    } else {
-        place_holder = NO_PIECE;
+    // Reset en passant — re-set below only for double pushes
+    enPassantSquare = NO_SQUARE;
+
+    switch (move.flag) {
+        case MoveFlag::Normal:
+        case MoveFlag::Capture:
+            board[toRank][toFile]     = movingPiece;
+            board[fromRank][fromFile] = NO_PIECE;
+            break;
+
+        case MoveFlag::DoublePush:
+            board[toRank][toFile]     = movingPiece;
+            board[fromRank][fromFile] = NO_PIECE;
+            // En passant target is the square the pawn skipped over
+            enPassantSquare = ((sideToMove == Colour::White) ? toRank - 1 : toRank + 1) * 8 + toFile;
+            break;
+
+        case MoveFlag::EnPassant: {
+            // Captured pawn sits on the same rank as `from`, same file as `to`
+            int capRank = fromRank;
+            int capFile = toFile;
+            move_copy.capturedPiece      = board[capRank][capFile];
+            board[capRank][capFile]      = NO_PIECE;
+            board[toRank][toFile]        = movingPiece;
+            board[fromRank][fromFile]    = NO_PIECE;
+            break;
+        }
+
+        case MoveFlag::CastleKing:
+            board[toRank][toFile]     = movingPiece;
+            board[fromRank][fromFile] = NO_PIECE;
+            // Kingside rook: h-file (7) -> f-file (5)
+            board[fromRank][5] = board[fromRank][7];
+            board[fromRank][7] = NO_PIECE;
+            break;
+
+        case MoveFlag::CastleQueen:
+            board[toRank][toFile]     = movingPiece;
+            board[fromRank][fromFile] = NO_PIECE;
+            // Queenside rook: a-file (0) -> d-file (3)
+            board[fromRank][3] = board[fromRank][0];
+            board[fromRank][0] = NO_PIECE;
+            break;
+
+        case MoveFlag::Promotion:
+            board[toRank][toFile]     = { move.promotionPiece, sideToMove };
+            board[fromRank][fromFile] = NO_PIECE;
+            break;
+
+        case MoveFlag::PromotionCapture:
+            // capturedPiece already set above
+            board[toRank][toFile]     = { move.promotionPiece, sideToMove };
+            board[fromRank][fromFile] = NO_PIECE;
+            break;
     }
 
-    board[move.to / 8][move.to % 8] = place_holder;
-    if (move.from != NO_SQUARE) {
-        board[move.from / 8][move.from % 8] = NO_PIECE;
+    // Update castling rights
+    if (movingPiece.type == PieceType::King) {
+        if (sideToMove == Colour::White) { castleWhiteKing = false; castleWhiteQueen = false; }
+        else                             { castleBlackKing = false; castleBlackQueen = false; }
     }
+    if (movingPiece.type == PieceType::Rook) {
+        if (move.from == 0)  castleWhiteQueen = false; // a1
+        if (move.from == 7)  castleWhiteKing  = false; // h1
+        if (move.from == 56) castleBlackQueen = false; // a8
+        if (move.from == 63) castleBlackKing  = false; // h8
+    }
+    // Rook captured on its home square
+    if (move_copy.capturedPiece.type == PieceType::Rook) {
+        if (move.to == 0)  castleWhiteQueen = false;
+        if (move.to == 7)  castleWhiteKing  = false;
+        if (move.to == 56) castleBlackQueen = false;
+        if (move.to == 63) castleBlackKing  = false;
+    }
+
     moveHistory.push_back(move_copy);
     sideToMove = (sideToMove == Colour::White) ? Colour::Black : Colour::White;
 }
@@ -86,14 +154,62 @@ void Board::undoMove() {
     Move lastMove = moveHistory.back();
     moveHistory.pop_back();
 
+    // Restore saved state
     castleWhiteKing  = lastMove.savedState.castleWK;
     castleWhiteQueen = lastMove.savedState.castleWQ;
     castleBlackKing  = lastMove.savedState.castleBK;
     castleBlackQueen = lastMove.savedState.castleBQ;
     enPassantSquare  = lastMove.savedState.enPassantSquare;
-    board[lastMove.from / 8][lastMove.from % 8] = board[lastMove.to / 8][lastMove.to % 8];
-    board[lastMove.to / 8][lastMove.to % 8] = lastMove.capturedPiece;
+    // Restore the side that made the move so promotion colour is correct
     sideToMove = (sideToMove == Colour::White) ? Colour::Black : Colour::White;
+
+    int fromRank = lastMove.from / 8;
+    int fromFile = lastMove.from % 8;
+    int toRank   = lastMove.to / 8;
+    int toFile   = lastMove.to % 8;
+
+    switch (lastMove.flag) {
+        case MoveFlag::Normal:
+        case MoveFlag::Capture:
+        case MoveFlag::DoublePush:
+            board[fromRank][fromFile] = board[toRank][toFile];
+            board[toRank][toFile]     = lastMove.capturedPiece;
+            break;
+
+        case MoveFlag::EnPassant:
+            // Pawn returns to `from`; destination was always empty
+            board[fromRank][fromFile] = board[toRank][toFile];
+            board[toRank][toFile]     = NO_PIECE;
+            // Restore the captured pawn to its actual square (same rank as from, same file as to)
+            board[fromRank][toFile]   = lastMove.capturedPiece;
+            break;
+
+        case MoveFlag::CastleKing:
+            board[fromRank][fromFile] = board[toRank][toFile]; // king back
+            board[toRank][toFile]     = NO_PIECE;
+            board[fromRank][7]        = board[fromRank][5];    // rook back to h-file
+            board[fromRank][5]        = NO_PIECE;
+            break;
+
+        case MoveFlag::CastleQueen:
+            board[fromRank][fromFile] = board[toRank][toFile]; // king back
+            board[toRank][toFile]     = NO_PIECE;
+            board[fromRank][0]        = board[fromRank][3];    // rook back to a-file
+            board[fromRank][3]        = NO_PIECE;
+            break;
+
+        case MoveFlag::Promotion:
+            // Replace promoted piece with pawn (no capture)
+            board[fromRank][fromFile] = { PieceType::Pawn, sideToMove };
+            board[toRank][toFile]     = NO_PIECE;
+            break;
+
+        case MoveFlag::PromotionCapture:
+            // Replace promoted piece with pawn, restore captured piece
+            board[fromRank][fromFile] = { PieceType::Pawn, sideToMove };
+            board[toRank][toFile]     = lastMove.capturedPiece;
+            break;
+    }
 }
 
 bool Board::canCastleKingside() const {

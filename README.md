@@ -3,7 +3,9 @@ ChessCrab is a custom chess engine written in C++, built as a personal project t
 
 This project started from a simple goal: to learn C++. Chess felt like the right challenge because it combines data structures, recursion, optimisation, and strategic reasoning in one system, and is also a really cool game!
 
-Motivation
+--- 
+
+## Motivation
 
 I created ChessCrab to move beyond high-level languages like Python and gain hands-on experience with:
 - Lower-level memory management
@@ -18,33 +20,32 @@ Features
 - Legal move generation for all pieces
 - Game state evaluation (basic heuristic scoring)
 
+---
 
-How It Was Built
-1. Board Representation
+## How It Was Built
 
-The first challenge was deciding how to represent the chess board.
+### 1. Board Representation
 
-I explored different approaches (2D arrays vs more advanced structures) and settled on 2D array as it balanced:
-- Simplicity (easy debugging)
-- Efficiency (fast access and updates)
-- 
-But also allows extensibility further on into the project for increasing efficiency.
+The first challenge was deciding *how* to represent the board. After exploring approaches like 2D arrays and bitboards, I settled on a **2D array** for its balance of:
+ 
+- **Simplicity** — easy to reason about and debug
+- **Efficiency** — fast access and updates
+- **Extensibility** — straightforward to migrate toward more advanced structures later
 
-This step was crucial because everything else depends on it.
-
-2. Move Generation
+### 2. Move Generation
 
 Next, I implemented move generation for each piece:
-- Pawns (including special rules like promotion/en passant implemented)
-- Sliding pieces (rook, bishop, queen)
-- Knight and king movement
+
+- **Pawns** — including en passant and promotion
+- **Sliding pieces** — rook, bishop, and queen (ray-based traversal)
+- **Knights & kings** — fixed offset movement
 
 This required careful handling of:
 - Board boundaries
 - Captures vs empty squares
 - Valid vs illegal moves (e.g. moving into check)
 
-3. Game Logic
+### 3. Game Logic
 - Once moves were working, I added:
 - Turn management
 - Check detection
@@ -52,22 +53,39 @@ This required careful handling of:
 
 This was one of the trickier parts, as it required simulating moves and verifying resulting states.
 
-4. Iteration & Debugging
+### 4. Iteration & Debugging
 A large part of the project involved:
 - Debugging edge cases (especially illegal moves)
 - Refactoring for a cleaner structure
 
+--- 
 
-Tech Stack
+## Tech Stack
 - Language: C++
 - Paradigm: Object-Oriented Programming
 - CMake
 
-What I Learned
+---
+
+## What I Learned
 This project significantly improved my understanding of:
 - Writing performant code in C++
 - Designing larger systems from scratch
 - Translating real-world rules into code
 - Debugging complex logic
 - Utilising AI to ...
+ 
+---
+ 
+## Roadmap
+ 
+- [ ] Alpha-beta pruning (minimax search)
+- [ ] Improved evaluation function (piece-square tables)
+- [ ] Bitboard representation for performance
+- [ ] UCI protocol support
+- [ ] Opening book integration
 
+---
+
+## AI
+This project was built with AI assistance as a learning accelerator — using it to understand patterns, debug logic, and explore C++ idioms faster than I could alone. The goal was always comprehension over completion.

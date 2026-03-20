@@ -73,7 +73,6 @@ This project significantly improved my understanding of:
 - Designing larger systems from scratch
 - Translating real-world rules into code
 - Debugging complex logic
-- Utilising AI to ...
  
 ---
  

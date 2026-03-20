@@ -88,4 +88,4 @@ This project significantly improved my understanding of:
 ---
 
 ## AI
-This project was built with AI assistance as a learning accelerator — using it to understand patterns, debug logic, and explore C++ idioms faster than I could alone. The goal was always comprehension over completion.
+This project was built with AI assistance as a learning accelerator. I used it to understand patterns, debug logic, and explore C++ faster than I could alone. The goal was always comprehension over completion.
